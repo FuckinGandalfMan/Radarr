@@ -271,11 +271,23 @@ namespace NzbDrone.Common.Http
             catch (WebException e)
             {
                 _logger.Warn("Failed to get response from: {0} {1}", url, e.Message);
+
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
                 throw;
             }
             catch (Exception e)
             {
                 _logger.Warn(e, "Failed to get response from: " + url);
+
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
                 throw;
             }
         }
