@@ -15,6 +15,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public List<ImageResource> Images { get; set; }
         public List<string> Genres { get; set; }
 
+        public int Year { get; set; }
         public DateTime? Premier { get; set; }
         public DateTime? InCinema { get; set; }
         public DateTime? PhysicalRelease { get; set; }
@@ -31,5 +32,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public string Status { get; set; }
         public CollectionResource Collection { get; set; }
         public string OriginalLanguage { get; set; }
+        public string Homepage { get; set; }
     }
 }

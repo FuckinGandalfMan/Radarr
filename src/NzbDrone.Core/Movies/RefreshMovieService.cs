@@ -101,8 +101,8 @@ namespace NzbDrone.Core.Movies
             movie.InCinemas = movieInfo.InCinemas;
             movie.Website = movieInfo.Website;
 
-            //movie.AlternativeTitles = movieInfo.AlternativeTitles;
             movie.Year = movieInfo.Year;
+            movie.SecondaryYear = movieInfo.SecondaryYear;
             movie.PhysicalRelease = movieInfo.PhysicalRelease;
             movie.YouTubeTrailerId = movieInfo.YouTubeTrailerId;
             movie.Studio = movieInfo.Studio;

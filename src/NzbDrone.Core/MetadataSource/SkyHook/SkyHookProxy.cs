@@ -132,8 +132,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             var movie = new Movie();
             var altTitles = new List<AlternativeTitle>();
 
-            movie.AlternativeTitles.AddRange(resource.AlternativeTitles.Select(MapAlternativeTitle));
-
             movie.TmdbId = resource.TmdbId;
             movie.ImdbId = resource.ImdbId;
             movie.Title = resource.Title;
@@ -142,10 +140,19 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             movie.SortTitle = Parser.Parser.NormalizeTitle(resource.Title);
             movie.Overview = resource.Overview;
 
-            // movie.Website = resource.we;
+            movie.AlternativeTitles.AddRange(resource.AlternativeTitles.Select(MapAlternativeTitle));
+
+            movie.Website = resource.Homepage;
             movie.InCinemas = resource.InCinema;
             movie.PhysicalRelease = resource.PhysicalRelease;
-            movie.Year = movie.InCinemas.HasValue ? movie.InCinemas.Value.Year : 0;
+
+            movie.Year = resource.Year;
+
+            //If the premier differs from the TMDB year, use it as a secondary year.
+            if (resource.Premier.HasValue && resource.Premier?.Year != movie.Year)
+            {
+                movie.SecondaryYear = resource.Premier?.Year;
+            }
 
             movie.Images = resource.Images.Select(MapImage).ToList();
 
