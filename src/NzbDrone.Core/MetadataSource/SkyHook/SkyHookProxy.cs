@@ -166,7 +166,9 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                 movie.Runtime = resource.Runtime.Value;
             }
 
-            movie.Certification = resource.Certifications.FirstOrDefault(m => m.Country == _configService.CertificationCountry.ToString())?.Certification;
+            var certificationCountry = _configService.CertificationCountry.ToString();
+
+            movie.Certification = resource.Certifications.FirstOrDefault(m => m.Country == certificationCountry)?.Certification;
             movie.Ratings = resource.Ratings.Select(MapRatings).FirstOrDefault() ?? new Ratings();
             movie.Genres = resource.Genres;
 
