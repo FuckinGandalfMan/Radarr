@@ -31,7 +31,7 @@ namespace Radarr.Api.V3.Movies
             var tasks = results.Where(movie => movie.TmdbId == 0 || !movie.Images.Any() || movie.Overview.IsNullOrWhiteSpace())
                 .Select(x => _movieSearch.MapMovieToTmdbMovieAsync(x));
 
-            var realResults = results.Where(movie => movie.TmdbId != 0 && movie.Images.Any() && movie.Overview.IsNullOrWhiteSpace()).ToList();
+            var realResults = results.Where(movie => movie.TmdbId != 0 && movie.Images.Any() && movie.Overview.IsNotNullOrWhiteSpace()).ToList();
 
             var mapped = Task.WhenAll(tasks).GetAwaiter().GetResult();
 
